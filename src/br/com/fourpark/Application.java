@@ -21,12 +21,13 @@ public class Application {
 	System.out.println("\n\n### FourPark - Sistema Comercial de Controle de Estacionamento ###");
 	System.out.println("\n                   ==========================================");
 	System.out.println("                  ||        1 - Registrar entrada           ||");
-	System.out.println("                  ||        2 - Registrar saida             ||");
-	System.out.println("                  ||        3 - Ver vagas disponíveis       ||");
-	System.out.println("                  ||        4 - Ver vagas ocupadas          ||");
-	System.out.println("                  ||        5 - Faturamento Total           ||");
-	System.out.println("                  ||        6 - Faturamento por Dia         ||");
-	System.out.println("                  ||        7 - Faturamento por Vaga        ||");
+	System.out.println("                  ||        2 - Registrar saida por vaga    ||");
+	System.out.println("                  ||        3 - Registrar saida por placa   ||");
+	System.out.println("                  ||        4 - Ver vagas disponíveis       ||");
+	System.out.println("                  ||        5 - Ver vagas ocupadas          ||");
+	System.out.println("                  ||        6 - Faturamento Total           ||");
+	System.out.println("                  ||        7 - Faturamento por Dia         ||");
+	System.out.println("                  ||        8 - Faturamento por Vaga        ||");
 	System.out.println("                  ||        0 - Sair                        ||");
 	System.out.println("                   ==========================================\n");
 	System.out.print("Insira Uma opção:");
@@ -42,24 +43,26 @@ public class Application {
 				Proprietario proprietario = cadastroProprietario();
 				Veiculo veiculo = cadastroVeiculo(proprietario);
 				registarEntrada(veiculo);
-
 				break;
 			case 2:
 				registarSaidaVaga();		
 				break;
 			case 3:
-				estacionamento.vagasDisponiveis();
+				registarSaidaPlaca();		
 				break;
 			case 4:
-				estacionamento.vagasOcupadas();
+				estacionamento.vagasDisponiveis();
 				break;
 			case 5:
-				System.out.println("Método de ver faturamento total aqui...");
+				estacionamento.vagasOcupadas();
 				break;
 			case 6:
-				System.out.println("Método de ver faturamento por dia aqui...");
+				System.out.println("Método de ver faturamento total aqui...");
 				break;
 			case 7:
+				System.out.println("Método de ver faturamento por dia aqui...");
+				break;
+			case 8:
 				System.out.println("Método de ver faturamento por vaga aqui...");
 				break;
 			default:
@@ -121,6 +124,18 @@ public class Application {
 		Integer numVaga = scanner.nextInt();				
 		
 		estacionamento.registraSaidaVaga(numVaga, horaSaidaFormatada);
+
+	}
+	
+	public static void registarSaidaPlaca() {
+		System.out.print("Informe a hora de saida");
+		String horaSaida = scanner.next();
+		DateTimeFormatter inputFormatHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+		LocalTime horaSaidaFormatada = LocalTime.parse(horaSaida, inputFormatHora);
+		System.out.print("Informe o numero da placa");
+		String numPlaca = scanner.next();				
+		
+		estacionamento.registraSaidaPlaca(numPlaca, horaSaidaFormatada);
 
 	}
 

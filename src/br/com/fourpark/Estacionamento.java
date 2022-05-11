@@ -36,7 +36,9 @@ public class Estacionamento {
 			if (vaga.getPosicao().equals(posicaoVaga)) {
 				vaga.setIsOcupado(false);
 				Double intervalo = Double.valueOf(ticket.getHoraEntrada().until(horaSaida, ChronoUnit.MINUTES));
-				System.out.println("R$ " + (intervalo * (ticket.getValorHora() / 60)));
+				Double valorPagar = (intervalo * (ticket.getValorHora() / 60));
+				ticket.setValorPagar(valorPagar);
+				System.out.println("Você ficou por: "+ intervalo +" minutos. " + "Totalizando um valor a pagar de:"+ "R$ " + valorPagar);
 			}
 		}
 	}
@@ -46,7 +48,9 @@ public class Estacionamento {
 			if (ticket.getVeiculo().getPlaca().equals(placaVeiculo)) {
 				ticket.getVaga().setIsOcupado(false);
 				Double intervalo = Double.valueOf(ticket.getHoraEntrada().until(horaSaida, ChronoUnit.MINUTES));
-				System.out.println("R$ " + (intervalo * (ticket.getValorHora() / 60)));
+				Double valorPagar = (intervalo * (ticket.getValorHora() / 60));
+				ticket.setValorPagar(valorPagar);
+				System.out.println("Você ficou por: "+ intervalo +" minutos. " + "Totalizando um valor a pagar de:"+ "R$ " + valorPagar);
 			}
 		}
 	}
@@ -68,10 +72,7 @@ public class Estacionamento {
 	public String vagasOcupadas() {
 		for (Vaga vaga : vagas) {
 			if (vaga.getIsOcupado()) {
-				System.out.println(vaga);
-			} else {
-				System.out.println("Todas as vagas estão livres!");
-				break;
+				System.out.println(" " + vaga + " ");
 			}
 		}
 		return null;
